@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SPACERS CHOICE</title>
+    <title>Body Mass Index</title>
 
     <!-- Custom fonts for this template-->
     <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -39,69 +39,22 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Content -->
-
-                <img src="files/images/cetme_red_dot.png" alt="Cetme Red Dot">
-
-                <p>---Print Info---</p>
-
-                <div class="row">
-                    <div class="col-12">Printer:Prusa I3 MK3</div>
-                </div>
-                <div class="row">
-                    <div class="col-12">Orientation: The butt should be flat on the printer bed.</div>
-                </div>
-                <div class="row">
-                    <div class="col-12">Plastic:Prusament PETG Black</div>
-                </div>
-                <div class="row">
-                    <div class="col-12">Settings: .2mm Quality , 100% infill></div>
-                </div>
-
-                <div class="row">
-                    <a href="files/g3_stock.3mf"
-                       class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Download</a>
-                </div>
-                </br>
-
+                <h1>BMI Calculator</h1>
+                <a href="https://www.cancer.org/healthy/cancer-causes/diet-physical-activity/body-weight-and-cancer-risk/adult-bmi.html">Cancer.org</a>
                 <p>
-                    I've had issues with this print sometimes failing. Keep an eye on it.
+                    <label for="weight">Weight (lbs):</label>
+                    <input type="number" id="weight" name="weight">
                 </p>
-
                 <p>
-                    After the print, you're going to need to a couple of threaded inserts.
+                    <label for="height-feet">Height (ft):</label>
+                    <input type="number" id="height-feet" name="height-feet">
                 </p>
-
-                <p> I bought the following from <a href="https://www.mcmaster.com/">https://www.mcmaster.com/</a> I
-                    already had a soldering iron. </p>
-
-                <div class="row">
-                    <div class="col-12">Installation Tip for 10-32/10-24/M5 Thread Size Heat-Set Inserts for Plastics
-                        92160A127
-                    </div>
-                    <div class="col-12">Tapered Heat-Set Inserts for Plastic
-                        Brass, M5 x 0.80 mm Thread Size, 6.700 mm Installed Length
-                        94180A361
-                    </div>
-                </div>
-
                 <p>
-                    Get your ass to a well ventilated area. Install the special tip into the soldering iron. Heat up the
-                    inserts, and set them flush into the little holes at the front of the stock.
+                    <label for="height-inches">Height (in):</label>
+                    <input type="number" id="height-inches" name="height-inches">
                 </p>
-
-                <p>
-                    Now disassemble a g3 stock assembly, and reasemble with the new stock. Mount a red dot, or scope
-                    with an ar-15 height mount, and have fun!
-                </p>
-
-                <p>
-                    This works for hk-91 pattern rifles. If you have a cetme c pattern rifle, what you can do is buy a
-                    surplus g3 stock assembly, and carefully sand down the plastic ring on the recoil spring until it
-                    fits in the cetme carrier.
-                </p>
-
+                <button onclick="calculateBMI()">Calculate BMI</button>
+                <p>Your BMI is: <span id="bmi"></span></p>
 
             </div>
             <!-- /.container-fluid -->
@@ -120,6 +73,17 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+<script>
+		function calculateBMI() {
+			const weight = document.getElementById("weight").value;
+			const heightFeet = document.getElementById("height-feet").value;
+			const heightInches = document.getElementById("height-inches").value;
+			const height = (heightFeet * 12) + parseInt(heightInches);
+			const bmi = (weight / (height ** 2)) * 703;
+			document.getElementById("bmi").textContent = bmi.toFixed(2);
+		}
+
+</script>
 
 <!-- Bootstrap core JavaScript-->
 <script src="startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js"></script>
@@ -163,10 +127,12 @@
             }
         }
     }
+
 </script>
 
 <script>
     includeHTML();
+
 </script>
 
 </body>
