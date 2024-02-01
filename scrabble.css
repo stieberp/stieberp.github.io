@@ -1,0 +1,30 @@
+/* styles.css */
+.list-item {
+  padding: 8px;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+/* Custom style to prevent stacking */
+.alphabetical-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.alphabetical-row .list-item {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+/* Additional styles for compact display */
+#twoLettersList {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -5px; /* Adjust margin to control spacing */
+}
+
+#twoLettersList .list-item {
+  margin: 5px;
+}
