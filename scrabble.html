@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
     <link href="startbootstrap-sb-admin-gh-pages/css/styles.css" rel="stylesheet"/>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="scrabble.css">
+    <link rel="stylesheet" href="css/scrabble.css">
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -28,22 +28,23 @@
         <main>
             <div class="container-fluid px-4">
                 <div class="container mt-3">
-    <div class="row">
-      <!-- Left Column: Search Box and Results -->
-      <div class="col-md-4">
-        <h2>Word Search</h2>
-        <input type="text" class="form-control mb-3" id="searchInput" placeholder="Search..." oninput="searchList()">
-        <ul id="resultList" class="list-group"></ul>
-      </div>
+                    <div class="row">
+                        <!-- Left Column: Search Box and Results -->
+                        <div class="col-md-4">
+                            <h2>Word Search</h2>
+                            <input type="text" class="form-control mb-3" id="searchInput" placeholder="Search..."
+                                   oninput="searchList()">
+                            <ul id="resultList" class="list-group"></ul>
+                        </div>
 
-      <!-- Right Column: Two Letter Words -->
-      <div class="col-md-8">
-        <h2>Two Letter Words</h2>
-        <!-- Add custom style to prevent stacking -->
-        <div id="twoLettersList"></div>
-      </div>
-    </div>
-  </div>
+                        <!-- Right Column: Two Letter Words -->
+                        <div class="col-md-8">
+                            <h2>Two Letter Words</h2>
+                            <!-- Add custom style to prevent stacking -->
+                            <div id="twoLettersList"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
 
@@ -53,18 +54,8 @@
 
 </body>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Load the navigation.html file
-        fetch('../navigation.html')
-            .then(response => response.text())
-            .then(data => {
-                // Insert the content into the element with the id "navigation"
-                document.getElementById('navigation').innerHTML = data;
-            });
-    });
-</script>
 
+<script src="js/navigation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
 <script src="startbootstrap-sb-admin-gh-pages/js/scripts.js"></script>
@@ -73,67 +64,9 @@
 <script src="startbootstrap-sb-admin-gh-pages/js/datatables-simple-demo.js"></script>
 
 <!-- scrabble -->
- <script src="scrabble_lists.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <!-- Add Bootstrap JS -->
-<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
-
-  <script>
-    // Function to populate the list based on the search input
-    function searchList() {
-      const searchInput = document.getElementById('searchInput').value.toLowerCase();
-      const resultList = document.getElementById('resultList');
-      const twoLettersList = document.getElementById('twoLettersList');
-
-      resultList.innerHTML = ''; // Clear previous results
-      twoLettersList.innerHTML = ''; // Clear previous two_letters list
-
-      // Check if the search input has at least two characters
-      if (searchInput.length >= 2) {
-        // Uncomment the desired matching criteria
-        //const filteredData = all.filter(item => item.toLowerCase().includes(searchInput.toLowerCase()));
-        //const filteredData = all.filter(item => item.toLowerCase().startsWith(searchInput));
-        const filteredData = all.filter(item => item.toLowerCase() === searchInput.toLowerCase());
-
-        // Populate the result list
-        filteredData.forEach(item => {
-          const li = document.createElement('li');
-          li.className = 'list-item list-group-item';
-          li.textContent = item;
-          resultList.appendChild(li);
-        });
-      }
-
-      // Group two_letters by starting letter
-      const groupedByLetter = groupByStartingLetter(two_letters);
-
-      // Populate the two_letters list with rows for each starting letter
-      for (const startingLetter in groupedByLetter) {
-        const words = groupedByLetter[startingLetter];
-        words.forEach(word => {
-          const span = document.createElement('span');
-          span.className = 'list-item';
-          span.textContent = word;
-          twoLettersList.appendChild(span);
-        });
-      }
-    }
-
-    // Initial population of the list
-    searchList();
-
-    // Function to group words by starting letter
-    function groupByStartingLetter(words) {
-      return words.reduce((result, word) => {
-        const startingLetter = word.charAt(0).toLowerCase();
-        if (!result[startingLetter]) {
-          result[startingLetter] = [];
-        }
-        result[startingLetter].push(word);
-        return result;
-      }, {});
-    }
-  </script>
+<script src="js/scrabble_lists.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="js/scrabble.js"></script>
 
 </html>
