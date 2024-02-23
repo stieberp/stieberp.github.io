@@ -60,13 +60,55 @@
 
 <script>
     function calculateBMI() {
-        const weight = document.getElementById("weight").value;
-        const heightFeet = document.getElementById("height-feet").value;
-        const heightInches = document.getElementById("height-inches").value;
-        const height = (heightFeet * 12) + parseInt(heightInches);
-        const bmi = (weight / (height ** 2)) * 703;
-        document.getElementById("bmi").textContent = bmi.toFixed(2);
+    const weight = parseFloat(document.getElementById("weight").value);
+    const heightFeet = parseInt(document.getElementById("height-feet").value);
+    const heightInches = parseInt(document.getElementById("height-inches").value);
+
+    if (isNaN(weight) || isNaN(heightFeet) || isNaN(heightInches)) {
+        document.getElementById("bmi").textContent = "Please enter valid numbers for weight and height.";
+        return;
     }
+
+    if (weight <= 0 || heightFeet <= 0 || heightInches < 0) {
+        document.getElementById("bmi").textContent = "Weight and height must be positive values.";
+        return;
+    }
+
+    const height = (heightFeet * 12) + heightInches;
+    if (height === 0) {
+        document.getElementById("bmi").textContent = "Height cannot be zero.";
+        return;
+    }
+
+    const bmi = (weight / (height ** 2)) * 703;
+    const mildInsults = [
+        "Looks like you've been enjoying too many snacks lately.",
+        "Maybe it's time to hit the gym a bit more often.",
+        "Seems like you've been enjoying some extra treats lately.",
+        "You might want to watch your portions a bit more.",
+        "Looks like your pants are fitting a little tighter than usual."
+    ];
+    const harshInsults = [
+        "You're really letting yourself go, aren't you?",
+        "Seriously, do you ever consider putting down the fork?",
+        "Do you even remember what a salad looks like?",
+        "You're not just overweight, you're a walking heart attack waiting to happen.",
+        "Have you considered hiring a personal trainer, or is that too much effort for you?"
+    ];
+
+    let insult = "";
+
+    if (bmi > 25) {
+        insult = mildInsults[Math.floor(Math.random() * mildInsults.length)];
+    }
+
+    if (bmi > 30) {
+        insult = harshInsults[Math.floor(Math.random() * harshInsults.length)];
+    }
+
+    document.getElementById("bmi").textContent = `Your BMI is ${bmi.toFixed(2)}. ${insult}`;
+}
+
 </script>
 
 <script src="js/navigation.js"></script>
