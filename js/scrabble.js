@@ -11,8 +11,8 @@
       if (searchInput.length >= 2) {
         // Uncomment the desired matching criteria
         //const filteredData = all.filter(item => item.toLowerCase().includes(searchInput.toLowerCase()));
-        //const filteredData = all.filter(item => item.toLowerCase().startsWith(searchInput));
-        const filteredData = all.filter(item => item.toLowerCase() === searchInput.toLowerCase());
+        const filteredData = all.filter(item => item.toLowerCase().startsWith(searchInput));
+        //const filteredData = all.filter(item => item.toLowerCase() === searchInput.toLowerCase());
 
         // Populate the result list
         filteredData.forEach(item => {
