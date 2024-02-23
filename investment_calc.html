@@ -38,7 +38,10 @@
                     <input type="number" id="annualRate" name="annualRate" value="7" required><br><br>
 
                     <label for="years">Number of Years:</label><br>
-                    <input type="number" id="years" name="years" value="10" required><br><br>
+                    <input type="number" id="years" name="years" required><br><br>
+
+                    <label for="yearlyAdditionalInvestment">Yearly Additional Investment ($):</label><br>
+                    <input type="number" id="yearlyAdditionalInvestment" name="yearlyAdditionalInvestment"><br><br>
 
                     <button type="submit">Calculate</button>
                 </form>
@@ -48,7 +51,6 @@
                     <p id="finalValue"></p>
                     <p id="investmentReturn"></p>
                 </div>
-
 
             </div>
         </main>
@@ -63,10 +65,16 @@
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    function calculateStaticReturn(initialInvestment, annualRate, years) {
+    function calculateStaticReturn(initialInvestment, annualRate, years, yearlyAdditionalInvestment = 0) {
         const rate = annualRate / 100;
-        const finalValue = initialInvestment * Math.pow(1 + rate, years);
-        const investmentReturn = finalValue - initialInvestment;
+        let finalValue = initialInvestment;
+        let investmentReturn = 0;
+
+        for (let i = 0; i < years; i++) {
+            finalValue += yearlyAdditionalInvestment; // Add yearly additional investment
+            finalValue *= (1 + rate);
+            investmentReturn = finalValue - initialInvestment - (yearlyAdditionalInvestment * years); // Calculate total return
+        }
 
         return {
             finalValue: numberWithCommas(finalValue.toFixed(2)),
@@ -80,8 +88,9 @@
         const initialInvestment = parseFloat(document.getElementById("initialInvestment").value);
         const annualRate = parseFloat(document.getElementById("annualRate").value);
         const years = parseFloat(document.getElementById("years").value);
+        const yearlyAdditionalInvestment = parseFloat(document.getElementById("yearlyAdditionalInvestment").value) || 0;
 
-        const result = calculateStaticReturn(initialInvestment, annualRate, years);
+        const result = calculateStaticReturn(initialInvestment, annualRate, years, yearlyAdditionalInvestment);
 
         document.getElementById("finalValue").innerText = "Final Value: $" + result.finalValue;
         document.getElementById("investmentReturn").innerText = "Investment Return: $" + result.investmentReturn;
