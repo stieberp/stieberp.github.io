@@ -37,7 +37,7 @@
                             <label for="initialInvestment" class="float-end">Initial Investment:</label>
                         </div>
                         <div class="col-6">
-                            <input type="number" id="initialInvestment" name="initialInvestment" required><br>
+                            <input type="number" id="initialInvestment" name="initialInvestment" ><br>
                         </div>
                     </div>
                     <div class="row">
@@ -53,7 +53,7 @@
                             <label for="years" class="float-end">Years:</label>
                         </div>
                         <div class="col-6">
-                            <input type="number" id="years" name="years" required><br>
+                            <input type="number" id="years" name="years" value="5" required><br>
                         </div>
                     </div>
                     <div class="row">
@@ -70,8 +70,7 @@
                         </div>
                         <div class="col-6">
                             <input type="number" id="yearlyAdditionalInvestment" name="yearlyAdditionalInvestment"><br>
-
-                    <button type="submit">Calculate</button>
+                            <button type="submit">Calculate</button>
                         </div>
                     </div>
 
@@ -132,7 +131,7 @@
         const months = parseFloat(document.getElementById("months").value) || 0;
         const yearlyAdditionalInvestment = parseFloat(document.getElementById("yearlyAdditionalInvestment").value) || 0;
 
-        if (initialInvestment <= 0 || annualRate <= 0 || (years <= 0 && months <= 0)) {
+        if ( annualRate <= 0 || (years <= 0 && months <= 0)) {
             alert("Please enter valid values for all required fields.");
             return;
         }
